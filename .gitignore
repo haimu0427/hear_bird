@@ -1,0 +1,5 @@
+/hear_bird_backend/.venv
+/hear_bird_backend/__pycache__
+/hear_bird_web/node_modules
+/hear_bird_web/dist
+

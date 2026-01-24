@@ -1,0 +1,7 @@
+{
+  "name": "Wen Ti Niao - Bird ID",
+  "description": "An AI-powered bird identification application that analyzes audio recordings to identify bird species.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
