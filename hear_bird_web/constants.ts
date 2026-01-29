@@ -1,6 +1,6 @@
 import { BirdDatabase } from './types';
 
-export const API_URL = 'http://192.168.31.94:8000/analyze';
+export const API_URL = 'http://localhost:8000/analyze';
 
 // Fallback image if species not found in our rich DB
 export const PLACEHOLDER_BIRD = "https://images.unsplash.com/photo-1552728089-57bdde30beb8?q=80&w=1000&auto=format&fit=crop";
