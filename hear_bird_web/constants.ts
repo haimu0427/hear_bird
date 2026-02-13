@@ -1,6 +1,8 @@
 import { BirdDatabase } from './types';
 
-export const API_URL = 'http://localhost:8000/analyze';
+// API URL - use environment variable or fallback to localhost in dev
+export const API_URL = import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? 'http://localhost:8000/analyze' : '/analyze');
 
 // Fallback image if species not found in our rich DB
 export const PLACEHOLDER_BIRD = "https://images.unsplash.com/photo-1552728089-57bdde30beb8?q=80&w=1000&auto=format&fit=crop";
@@ -13,7 +15,7 @@ export const BIRD_DB: BirdDatabase = {
     image: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/308119951/2400",
     coverImage: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/308119951/2400",
     coverImageCenterX: 0.9,
-    wikiLink: "https://en.wikipedia.org/wiki/Eurasian_tree_sparrow"
+    wikiLink: "https://en.wikipedia.org/wiki/Eurasian_collared-dove"
   },
   "Passer montanus": {
     scientificName: "Passer montanus",
@@ -63,7 +65,7 @@ export const BIRD_DB: BirdDatabase = {
   "Turdus iliacus": {
     scientificName: "Turdus iliacus",
     commonName: "Redwing",
-    description: "A colourful, familiar tit of gardens and woodland. It is easily recognizable by its blue and yellow plumage.",
+    description: "A medium-sized thrush with a distinctive pale supercilium (eyebrow stripe), a reddish-orange flank and underwing, and dark brown upperparts. It is smaller than the Song Thrush and has a more speckled breast. Redwings are migratory birds, breeding in northern Europe and Asia, and wintering in southern and western Europe, including the UK.",
     image: "https://www.woodlandtrust.org.uk/media/1642/redwing-on-berry-branch-alamydy2jc8-robin-chittenden.jpg?rxy=0.5108225108225108,0.4307692307692308&width=1110&height=624&v=1dc2bfd0a98ab50",
     coverImage: "https://www.woodlandtrust.org.uk/media/1642/redwing-on-berry-branch-alamydy2jc8-robin-chittenden.jpg?rxy=0.5108225108225108,0.4307692307692308&width=1110&height=624&v=1dc2bfd0a98ab50",
     coverImageCenterX: 0.4,
@@ -72,7 +74,7 @@ export const BIRD_DB: BirdDatabase = {
   "Pinicola enucleator": {
     scientificName: "Pinicola enucleator",
     commonName: "Pine Grosbeak",
-    description: "The largest UK tit – green and yellow with a striking glossy black head with white cheeks and a distinctive two-syllable song.",
+    description: "A large finch found in coniferous forests across northern North America, Europe, and Asia. Males are strikingly pinkish-red, while females and immature birds are yellowish-olive or grayish-olive. Both sexes have dark wings with two white wingbars and a robust, conical beak specialized for cracking seeds and fruits.",
     image: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/67356151/1800",
     coverImage: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/67356151/1800",
     coverImageCenterX: 0.7,
@@ -81,7 +83,7 @@ export const BIRD_DB: BirdDatabase = {
   "Baeolophus bicolor": {
     scientificName: "Baeolophus bicolor",
     commonName: "Tufted Titmouse",
-    description: "Not as colourful as some of its relatives, the Coal Tit has a distinctive grey back, black cap, and white patch at the back of its neck.",
+    description: "A small songbird native to North America, easily recognized by its prominent tufted crest on the head. It has gray upperparts, whitish underparts with a gray wash on the flanks, and a black forehead. Titmice are active, social birds often seen in mixed flocks with chickadees and other small songbirds.",
     image: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/302627281/1800",
     coverImage: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/302627281/1800",
     coverImageCenterX: 0.9,
@@ -102,25 +104,25 @@ export const MOCK_RESULTS_FALLBACK = {
   msg: "success",
   results: [
     {
-      start: "0.0",
-      end: "2.62",
+      start: 0.0,
+      end: 2.62,
       scientificName: "Cyanistes caeruleus",
       commonName: "Eurasian Blue Tit",
-      confidence: "0.9823"
+      confidence: 0.9823
     },
     {
-      start: "0.0",
-      end: "2.62",
+      start: 0.0,
+      end: 2.62,
       scientificName: "Parus major",
       commonName: "Great Tit",
-      confidence: "0.6500"
+      confidence: 0.6500
     },
     {
-      start: "0.0",
-      end: "2.62",
+      start: 0.0,
+      end: 2.62,
       scientificName: "Periparus ater",
       commonName: "Coal Tit",
-      confidence: "0.4000"
+      confidence: 0.4000
     }
   ]
 };

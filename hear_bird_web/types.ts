@@ -1,9 +1,9 @@
 export interface BirdResult {
-  start: string;
-  end: string;
+  start: number;  // Time in seconds
+  end: number;    // Time in seconds
   scientificName: string;
   commonName: string;
-  confidence: string;
+  confidence: number;  // Confidence score 0-1
 }
 
 export interface ApiResponse {

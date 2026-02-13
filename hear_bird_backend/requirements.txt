@@ -1,3 +1,5 @@
-fastapi[standard]
-uvicorn
-birdnet-analyzer
+fastapi[standard]==0.115.0
+uvicorn[standard]==0.32.0
+birdnet-analyzer==1.5.0
+python-multipart==0.0.9
+slowapi==0.1.9

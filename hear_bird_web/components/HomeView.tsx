@@ -11,7 +11,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onFileSelect, isProcessing }
   const recorderRef = useRef<MediaRecorder | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isRecording, setIsRecording] = useState(false);
+
+  const MAX_RECORDING_TIME_SECONDS = 60;
 
   useEffect(() => {
     return () => {
@@ -46,6 +49,14 @@ export const HomeView: React.FC<HomeViewProps> = ({ onFileSelect, isProcessing }
       recorderRef.current = recorder;
       chunksRef.current = [];
 
+      // Set timeout to stop recording after max time
+      timeoutRef.current = setTimeout(() => {
+        if (recorderRef.current && recorderRef.current.state === 'recording') {
+          recorderRef.current.stop();
+          alert(`Recording stopped: maximum time (${MAX_RECORDING_TIME_SECONDS}s) reached`);
+        }
+      }, MAX_RECORDING_TIME_SECONDS * 1000);
+
       recorder.addEventListener('dataavailable', event => {
         if (event.data.size > 0) {
           chunksRef.current.push(event.data);
@@ -57,6 +68,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onFileSelect, isProcessing }
         const blob = new Blob(chunksRef.current, { type: mimeType });
         const file = new File([blob], `recording-${Date.now()}.webm`, { type: mimeType });
         chunksRef.current = [];
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
         stopStream();
         onFileSelect(file);
       });

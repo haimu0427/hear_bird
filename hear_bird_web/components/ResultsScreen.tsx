@@ -19,11 +19,18 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({ data, onBack }) =>
           description: dbEntry ? dbEntry.description : "No description available.",
           coverImage: dbEntry ? dbEntry.coverImage : PLACEHOLDER_BIRD,
           coverImageCenterX: dbEntry?.coverImageCenterX ?? 0.5,
-          // Ensure confidence is formatted as percentage
-          matchPercentage: Math.round(parseFloat(result.confidence) * 100)
+          wikiLink: dbEntry?.wikiLink || null,
+          // Convert confidence (0-1) to percentage
+          matchPercentage: Math.round(result.confidence * 100)
         };
     }).sort((a, b) => b.matchPercentage - a.matchPercentage); // Sort by highest confidence
   }, [data]);
+
+  const handleWikiLinkClick = () => {
+    if (primaryMatch.wikiLink) {
+      window.open(primaryMatch.wikiLink, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   const primaryMatch = processedData[0];
   const otherPossibilities = processedData.slice(1);
@@ -78,9 +85,12 @@ export const ResultsScreen: React.FC<ResultsScreenProps> = ({ data, onBack }) =>
                                 <p className="text-white/80 text-lg font-medium italic font-serif tracking-wide">{primaryMatch.scientificName}</p>
                             </div>
 
-                            <div className="mt-6 flex items-center gap-2 text-white/60 text-sm font-medium cursor-pointer hover:text-white transition-colors">
-                                <span>Tap to view wikipedia</span>
-                                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                            <div
+                              className={`mt-6 flex items-center gap-2 text-white/60 text-sm font-medium transition-colors ${primaryMatch.wikiLink ? 'cursor-pointer hover:text-white' : 'cursor-not-allowed'}`}
+                              onClick={primaryMatch.wikiLink ? handleWikiLinkClick : undefined}
+                            >
+                                <span>{primaryMatch.wikiLink ? 'Tap to view wikipedia' : 'No wikipedia link available'}</span>
+                                {primaryMatch.wikiLink && <span className="material-symbols-outlined text-sm">arrow_forward</span>}
                             </div>
                         </div>
                     </div>

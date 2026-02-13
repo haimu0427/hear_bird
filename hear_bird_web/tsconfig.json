@@ -18,6 +18,11 @@
     "moduleDetection": "force",
     "allowJs": true,
     "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "paths": {
       "@/*": [
         "./*"

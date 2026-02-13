@@ -4,12 +4,15 @@ interface VisualizerProps {
   isListening: boolean;
 }
 
+// Idle heights for the visualizer when not listening (creates a nice symmetric pattern)
+const IDLE_HEIGHTS = [20, 30, 25, 40, 50, 30, 60, 80, 50, 55, 40, 20, 30, 15, 10];
+
 export const Visualizer: React.FC<VisualizerProps> = ({ isListening }) => {
-  const [heights, setHeights] = useState<number[]>(Array(15).fill(10));
+  const [heights, setHeights] = useState<number[]>(Array(IDLE_HEIGHTS.length).fill(10));
 
   useEffect(() => {
     if (!isListening) {
-      setHeights(Array(15).fill(10)); // Reset to low idle state
+      setHeights(IDLE_HEIGHTS);
       return;
     }
 
@@ -28,8 +31,8 @@ export const Visualizer: React.FC<VisualizerProps> = ({ isListening }) => {
           className={`w-1.5 rounded-full transition-all duration-300 ease-in-out ${
             i === 7 ? 'bg-primary shadow-[0_0_15px_rgba(19,236,91,0.6)]' : 'bg-primary'
           }`}
-          style={{ 
-            height: `${isListening ? h : [20, 30, 25, 40, 50, 30, 60, 80, 50, 55, 40, 20, 30, 15, 10][i]}%`,
+          style={{
+            height: `${isListening ? h : IDLE_HEIGHTS[i]}%`,
             opacity: isListening ? 1 : Math.max(0.2, 1 - (Math.abs(7 - i) * 0.1))
           }}
         ></div>
