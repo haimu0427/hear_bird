@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr:*)",
+      "mcp__zread__get_repo_structure",
+      "Bash(tree:*)",
+      "Bash(dir:*)"
+    ]
+  }
+}

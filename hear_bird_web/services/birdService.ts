@@ -1,5 +1,19 @@
+import { z } from 'zod';
 import { API_URL, MOCK_RESULTS_FALLBACK } from '../constants';
 import { ApiResponse } from '../types';
+
+const ApiResponseSchema = z.object({
+  msg: z.string(),
+  results: z.array(
+    z.object({
+      start: z.number(),
+      end: z.number(),
+      scientificName: z.string(),
+      commonName: z.string(),
+      confidence: z.number()
+    })
+  )
+});
 
 export interface AnalysisError {
   type: 'network' | 'server' | 'client';
@@ -22,8 +36,10 @@ export const analyzeAudio = async (file: File): Promise<ApiResponse> => {
       throw new Error(`API Error ${response.status}: ${errorText || response.statusText}`);
     }
 
-    const data = await response.json();
-    return data as ApiResponse;
+    const rawData = await response.json();
+
+    const data = ApiResponseSchema.parse(rawData);
+    return data;
 
   } catch (error) {
     let errorType: AnalysisError['type'] = 'client';

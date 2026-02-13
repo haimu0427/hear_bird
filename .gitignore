@@ -1,5 +1,67 @@
+# Python
 /hear_bird_backend/.venv
+/hear_bird_backend/venv
 /hear_bird_backend/__pycache__
+/hear_bird_backend/**/__pycache__
+/hear_bird_backend/*.pyc
+/hear_bird_backend/**/*.pyc
+/hear_bird_backend/.pytest_cache
+/hear_bird_backend/**/*.egg-info
+
+# Node.js / Frontend
 /hear_bird_web/node_modules
 /hear_bird_web/dist
+/hear_bird_web/dist-ssr
+/hear_bird_web/.vite
+/hear_bird_web/coverage
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs
+*.log
+logs/
+**/*.log
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Build artifacts
+build/
+*.egg-info/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Capacitor (Android/iOS)
+/hear_bird_web/android/app/build
+/hear_bird_web/android/.gradle
+/hear_bird_web/android/local.properties
+/hear_bird_web/ios/App/build
+/hear_bird_web/ios/App/Pods
 
